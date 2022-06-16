@@ -23,7 +23,7 @@ public struct FullScreenVideo: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: geo.size.width, height: geo.size.height)
                 .onAppear {
-                    player.play()
+                    //player.play()
                 }
                 .onDisappear {
                     player.pause()
@@ -32,7 +32,7 @@ public struct FullScreenVideo: View {
                     player.pause()
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                    player.play()
+                   // player.play()
                 }
         }
         .ignoresSafeArea()
