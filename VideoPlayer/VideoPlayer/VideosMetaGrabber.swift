@@ -91,7 +91,7 @@ private func readLocalFile(forName name: String) -> Data? {
    }
     
          private func loadVideo(filename:String)->AVPlayerItem{
-             let fileUrl = Bundle.main.url(forResource: filename, withExtension: "mp4")
+             let fileUrl = Bundle.main.url(forResource: filename, withExtension: nil)
              let asset = AVAsset(url: fileUrl!)
              return AVPlayerItem(asset: asset)
     }

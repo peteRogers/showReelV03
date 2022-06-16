@@ -90,6 +90,7 @@ class LoopingPlayerUIView: UIView {
                                                            selector: #selector(self.playerItemDidReachEnd(notification:)),
                                                                    name: .AVPlayerItemDidPlayToEndTime,
                                                            object: self.player?.currentItem)
+                    self.player?.play()
                     self.playerLayer.isHidden = false
                 })
                
