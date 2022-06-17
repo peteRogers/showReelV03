@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F58B270285C8F3700C6B7A9 /* maddie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3F58B26F285C8F3700C6B7A9 /* maddie.mp4 */; };
 		6125D2AB2858929E001747D8 /* test1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6125D2AA2858929E001747D8 /* test1.mp4 */; };
 		6125D2EC2858BFDC001747D8 /* VideosMetaGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125D2EB2858BFDC001747D8 /* VideosMetaGrabber.swift */; };
 		6125D2EE2858C256001747D8 /* vids.json in Resources */ = {isa = PBXBuildFile; fileRef = 6125D2ED2858C256001747D8 /* vids.json */; };
@@ -15,11 +16,11 @@
 		DA7E84FF27DB749B00F3AC4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7E84FE27DB749B00F3AC4B /* Assets.xcassets */; };
 		DA7E850227DB749B00F3AC4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7E850127DB749B00F3AC4B /* Preview Assets.xcassets */; };
 		DA7E851227DB758100F3AC4B /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7E850F27DB758100F3AC4B /* PlayerView.swift */; };
-		DA7E851327DB758100F3AC4B /* FullScreenVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7E851027DB758100F3AC4B /* FullScreenVideo.swift */; };
 		DA7E851427DB758100F3AC4B /* LoopingPlayerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7E851127DB758100F3AC4B /* LoopingPlayerUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F58B26F285C8F3700C6B7A9 /* maddie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = maddie.mp4; sourceTree = "<group>"; };
 		6125D2A728588E37001747D8 /* VideoPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VideoPlayer.entitlements; sourceTree = "<group>"; };
 		6125D2AA2858929E001747D8 /* test1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.mp4; sourceTree = "<group>"; };
 		6125D2EB2858BFDC001747D8 /* VideosMetaGrabber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosMetaGrabber.swift; sourceTree = "<group>"; };
@@ -30,7 +31,6 @@
 		DA7E84FE27DB749B00F3AC4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA7E850127DB749B00F3AC4B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA7E850F27DB758100F3AC4B /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		DA7E851027DB758100F3AC4B /* FullScreenVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenVideo.swift; sourceTree = "<group>"; };
 		DA7E851127DB758100F3AC4B /* LoopingPlayerUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopingPlayerUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +94,7 @@
 		DA7E850D27DB756300F3AC4B /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				3F58B26F285C8F3700C6B7A9 /* maddie.mp4 */,
 				6125D2ED2858C256001747D8 /* vids.json */,
 				6125D2AA2858929E001747D8 /* test1.mp4 */,
 			);
@@ -103,7 +104,6 @@
 		DA7E850E27DB756E00F3AC4B /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				DA7E851027DB758100F3AC4B /* FullScreenVideo.swift */,
 				DA7E851127DB758100F3AC4B /* LoopingPlayerUIView.swift */,
 				6125D2EB2858BFDC001747D8 /* VideosMetaGrabber.swift */,
 				DA7E850F27DB758100F3AC4B /* PlayerView.swift */,
@@ -170,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6125D2EE2858C256001747D8 /* vids.json in Resources */,
+				3F58B270285C8F3700C6B7A9 /* maddie.mp4 in Resources */,
 				DA7E850227DB749B00F3AC4B /* Preview Assets.xcassets in Resources */,
 				DA7E84FF27DB749B00F3AC4B /* Assets.xcassets in Resources */,
 				6125D2AB2858929E001747D8 /* test1.mp4 in Resources */,
@@ -185,7 +186,6 @@
 			files = (
 				DA7E851427DB758100F3AC4B /* LoopingPlayerUIView.swift in Sources */,
 				DA7E84FD27DB749A00F3AC4B /* MainView.swift in Sources */,
-				DA7E851327DB758100F3AC4B /* FullScreenVideo.swift in Sources */,
 				DA7E84FB27DB749A00F3AC4B /* VideoPlayerApp.swift in Sources */,
 				6125D2EC2858BFDC001747D8 /* VideosMetaGrabber.swift in Sources */,
 				DA7E851227DB758100F3AC4B /* PlayerView.swift in Sources */,

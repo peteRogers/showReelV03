@@ -11,8 +11,9 @@ import AVFoundation
 
 
 struct MainView: View {
-   
-   
+    @State private var player = AVQueuePlayer()
+    @State private var showingSheet = false
+
    
                 
             
@@ -20,8 +21,15 @@ struct MainView: View {
        
         ZStack(alignment: .center) {
                 
-                FullScreenVideo()
-           
+            PlayerView(player: player).onTapGesture{
+                print("hello")
+                NSCursor.unhide()
+                showingSheet.toggle()
+            }.fullScreenCover(isPresented: $showingSheet) {
+                SheetView().background(.white)
+            }
+         
+            
 
 //            if(showTitles){
 //                    HStack(){
@@ -51,13 +59,32 @@ struct MainView: View {
         }
     }
     
-//    private func makeNavigationLink() -> some View {
-//        NavigationLink(
-//            destination: SecondView(),
-//            isActive: $goNextTapped,
-//            label: { EmptyView() }
-//        )
-//    }
+struct SheetView: View {
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        VStack{
+            Spacer()
+            Text("Make this window fullscreen and then Press button below to hide the cursor")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 20))
+                                        .foregroundColor(.black)
+                                        .padding()
+          
+        
+        Button("Press to Hide") {
+            NSCursor.hide()
+            dismiss()
+            
+        }
+        .font(.title)
+        .padding()
+        .background(.white)
+        .padding()
+            Spacer()
+        }
+    }
+}
 
 
 struct MainView_Previews: PreviewProvider {

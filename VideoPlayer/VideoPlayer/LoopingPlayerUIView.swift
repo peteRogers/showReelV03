@@ -20,10 +20,10 @@ class LoopingPlayerUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Depending on your video you can select a proper `videoGravity` property to fit better
+   
     init(
          player: AVQueuePlayer,
-         videoGravity: AVLayerVideoGravity = .resizeAspect) {
+         videoGravity: AVLayerVideoGravity = .resizeAspectFill) {
              self.player = player
         super.init(frame: .zero)
        
@@ -33,7 +33,7 @@ class LoopingPlayerUIView: UIView {
         playerLayer.player = player
         playerLayer.videoGravity = videoGravity
         layer.addSublayer(playerLayer)
-        player.actionAtItemEnd = .none
+             player.actionAtItemEnd = .pause
        // player.replaceCurrentItem(with: item)
          
         videos = VideosMetaGrabber()
@@ -51,6 +51,8 @@ class LoopingPlayerUIView: UIView {
              nv.textColor = .white
         
        loadVideo()
+             
+             
             
     }
     
@@ -113,15 +115,16 @@ class LoopingPlayerUIView: UIView {
 
     
     override func layoutSubviews() {
-        print("from layout")
+       // print("from layout")
         super.layoutSubviews()
         playerLayer.frame = bounds
-        
+        playerLayer.videoGravity = .resizeAspect
+       // print(playerLayer.videoRect.size)
         tv.font = UIFont(name: "HelveticaNeue-Bold" , size: bounds.height * 0.05)
         tv.frame = CGRect(origin: CGPoint(x: bounds.width * 0.09, y: bounds.height - (bounds.height * 0.45)), size: CGSize(width: bounds.width, height: bounds.height * 0.06))
         nv.font = UIFont(name: "HelveticaNeue-Light" , size: bounds.height * 0.04)
         nv.frame = CGRect(origin: CGPoint(x: bounds.width * 0.09, y: bounds.height - (bounds.height * 0.38)), size: CGSize(width: bounds.width, height: bounds.height * 0.05))
-        NSCursor.hide()
+       // NSCursor.hide()
        // print(bounds)
     }
     
