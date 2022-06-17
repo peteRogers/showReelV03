@@ -13,6 +13,7 @@ import AVFoundation
 struct MainView: View {
     @State private var player = AVQueuePlayer()
     @State private var showingSheet = false
+    @State private var sliderVal:Double = 5
 
    
                 
@@ -21,12 +22,13 @@ struct MainView: View {
        
         ZStack(alignment: .center) {
                 
-            PlayerView(player: player).onTapGesture{
-                print("hello")
+            PlayerView(player: player, sliderVal: $sliderVal).onTapGesture{
+               
                 NSCursor.unhide()
                 showingSheet.toggle()
+                print(sliderVal)
             }.fullScreenCover(isPresented: $showingSheet) {
-                SheetView().background(.white)
+                SheetView(sliderVal: $sliderVal).background(.white)
             }
          
             
@@ -61,9 +63,18 @@ struct MainView: View {
     
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
-
+    @Binding var sliderVal: Double
     var body: some View {
+        
+      
         VStack{
+          //  Spacer()
+            
+            Slider(value: $sliderVal, in: 0...20).padding()
+            Text("Time Delay to view Titles: \(Int(sliderVal))").fontWeight(.bold)
+                .font(.system(size: 20))
+                .foregroundColor(.black)
+                .padding()
             Spacer()
             Text("Make this window fullscreen and then Press button below to hide the cursor")
                                         .fontWeight(.bold)
@@ -76,13 +87,15 @@ struct SheetView: View {
             NSCursor.hide()
             dismiss()
             
+            
         }
         .font(.title)
         .padding()
         .background(.white)
         .padding()
             Spacer()
-        }
+        }.padding()
+        
     }
 }
 

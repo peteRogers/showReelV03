@@ -12,6 +12,7 @@ import AVFoundation
 class LoopingPlayerUIView: UIView {
     private let playerLayer = AVPlayerLayer()
     private var player: AVPlayer?
+    var sliderVal:Double?
     private var videos:VideosMetaGrabber?
     private var tv:UILabel!
     private var nv:UILabel!
@@ -22,9 +23,10 @@ class LoopingPlayerUIView: UIView {
     
    
     init(
-         player: AVQueuePlayer,
+        player: AVQueuePlayer, sliderVal:Double,
          videoGravity: AVLayerVideoGravity = .resizeAspectFill) {
              self.player = player
+             self.sliderVal = sliderVal
         super.init(frame: .zero)
        
 
@@ -56,6 +58,12 @@ class LoopingPlayerUIView: UIView {
             
     }
     
+   func setTime(sliderVal:Double){
+        self.sliderVal = sliderVal
+        
+        
+    }
+    
     private func loadVideo(){
        
        
@@ -75,13 +83,16 @@ class LoopingPlayerUIView: UIView {
         tv.text = v!.title
         nv.alpha = 0
         nv.text = v!.name
+        print(sliderVal!)
         UIView.animate(withDuration: 1, delay: 1,
             animations: {
-            self.tv.alpha = 1
-            self.nv.alpha = 1
+            if(self.sliderVal! > 0){
+                self.tv.alpha = 1
+                self.nv.alpha = 1
+            }
                 
         }, completion: { _ in
-            UIView.animate(withDuration: 1, delay:5, animations: {
+            UIView.animate(withDuration: 1, delay:self.sliderVal!, animations: {
                 self.tv.alpha = 0
                 self.nv.alpha = 0
                 
