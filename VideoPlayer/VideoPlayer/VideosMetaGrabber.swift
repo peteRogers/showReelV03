@@ -51,8 +51,9 @@ private func readLocalFile(forName name: String) -> Data? {
         }
        // vids[current].item?.seek(to: CMTime.zero)
         let v = vids[current]
-        current += 1
         makeRunList()
+        current += 1
+        
         return v
         
         
@@ -62,20 +63,24 @@ private func readLocalFile(forName name: String) -> Data? {
     func makeRunList(){
         var cumulator = current
         var time = Date()
-        print(time)
+        time = time + Double(vids[cumulator].time?.seconds ?? 0)
+        time = time.addingTimeInterval(Double(delay+3))
+       // print(time)
+        cumulator += 1
         var plist:[playListInfo] = []
-        for _ in 0 ... 8{
+        for _ in 0 ... 12{
             if(cumulator == vids.count){
                 cumulator = 0
             }
-           // print(vids[cumulator].item!.duration.seconds)
-            time = time + Double(vids[cumulator].item!.duration.seconds)
-            time = time.addingTimeInterval(Double(delay+3))
-           
+           //print(vids[cumulator].time?.seconds)
             let df = DateFormatter()
             df.dateFormat = "HH:mm"
             let p = playListInfo(title: vids[cumulator].title, name: vids[cumulator].name, time: df.string(from: time) )
             plist.append(p)
+            time = time + Double(vids[cumulator].time?.seconds ?? 0)
+            time = time.addingTimeInterval(Double(delay+3))
+           
+            
             cumulator += 1
            
         }
@@ -123,7 +128,8 @@ private func readLocalFile(forName name: String) -> Data? {
            for vi in decodedData{
                print(vi.filename)
                let item = loadVideo(filename: vi.filename)
-               let vidInfo = VidInfo(title: vi.title, filename: vi.filename, name: vi.name, item: item)
+              
+               let vidInfo = VidInfo(title: vi.title, filename: vi.filename, name: vi.name, item: item, time: item.duration)
                vids.append(vidInfo)
            }
        } catch {
@@ -135,7 +141,8 @@ private func readLocalFile(forName name: String) -> Data? {
             
              let fileUrl = Bundle.main.url(forResource: filename, withExtension: nil)
              let asset = AVAsset(url: fileUrl!)
-             asset.duration.seconds
+             let s = asset.duration.seconds
+             print(s)
              return AVPlayerItem(asset: asset)
     }
 }
@@ -151,6 +158,7 @@ struct VidInfo{
     let filename: String
     let name: String
     let item:AVPlayerItem?
+    let time: CMTime?
    
 }
 
