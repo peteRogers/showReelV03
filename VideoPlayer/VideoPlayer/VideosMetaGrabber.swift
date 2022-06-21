@@ -49,8 +49,44 @@ private func readLocalFile(forName name: String) -> Data? {
        // vids[current].item?.seek(to: CMTime.zero)
         let v = vids[current]
         current += 1
+        makeRunList()
         return v
         
+        
+    }
+    
+    
+    func makeRunList(){
+        var cumulator = current
+        var time = Date()
+        var plist:[playListInfo] = []
+        for _ in 0 ... 8{
+            if(cumulator == vids.count){
+                cumulator = 0
+            }
+            
+            time = time + Double(vids[cumulator].item!.duration.seconds)
+           // print(vids[cumulator].name)
+           // print(time)
+            let df = DateFormatter()
+            df.dateFormat = "HH:mm"
+            let p = playListInfo(title: vids[cumulator].title, name: vids[cumulator].name, time: df.string(from: time) )
+            plist.append(p)
+            cumulator += 1
+           
+        }
+       /// print(plist)
+        do {
+           
+            let data = try JSONEncoder().encode(plist)
+            var url = FileManager.default.temporaryDirectory
+                url.appendPathComponent("reports.json")
+                print(url)
+                try data.write(to: url)
+            
+        } catch {
+            print(error)
+        }
         
     }
     
@@ -93,6 +129,7 @@ private func readLocalFile(forName name: String) -> Data? {
          private func loadVideo(filename:String)->AVPlayerItem{
              let fileUrl = Bundle.main.url(forResource: filename, withExtension: nil)
              let asset = AVAsset(url: fileUrl!)
+             print(asset.duration.seconds)
              return AVPlayerItem(asset: asset)
     }
 }
@@ -108,6 +145,13 @@ struct VidInfo{
     let filename: String
     let name: String
     let item:AVPlayerItem?
+   
+}
+
+struct playListInfo:Encodable{
+    let title: String
+    let name: String
+    let time: String
 }
 
 
