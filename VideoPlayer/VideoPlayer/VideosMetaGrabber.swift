@@ -79,11 +79,11 @@ private func readLocalFile(forName name: String) -> Data? {
         do {
            
             let data = try JSONEncoder().encode(plist)
-            var url = FileManager.default.temporaryDirectory
+            if var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 url.appendPathComponent("reports.json")
-                print(url)
+               // print(url)
                 try data.write(to: url)
-            
+            }
         } catch {
             print(error)
         }
@@ -95,6 +95,7 @@ private func readLocalFile(forName name: String) -> Data? {
    private func loadJson(fromURLString urlString: String,
                          completion: @escaping (Result<Data, Error>) -> Void) {
        if let url = URL(string: urlString) {
+           print("url String \(url)")
            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
                if let error = error {
                    completion(.failure(error))
