@@ -60,6 +60,7 @@ class LoopingPlayerUIView: UIView {
     
    func setTime(sliderVal:Double){
         self.sliderVal = sliderVal
+        videos?.setDelay(d: sliderVal)
         
         
     }

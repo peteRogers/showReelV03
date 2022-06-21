@@ -12,6 +12,7 @@ class VideosMetaGrabber{
     
     var vids:[VidInfo] = []
     var current:Int = 0
+    var delay:Double = 0
     
     init (){
         if let localData = self.readLocalFile(forName: "vids") {
@@ -26,7 +27,9 @@ class VideosMetaGrabber{
 //        self.parse(jsonData:localData)
 //        
 //    }
-    
+    func setDelay(d:Double){
+        self.delay = d
+    }
     
 private func readLocalFile(forName name: String) -> Data? {
        do {
@@ -66,6 +69,7 @@ private func readLocalFile(forName name: String) -> Data? {
             }
             
             time = time + Double(vids[cumulator].item!.duration.seconds)
+            time = time.addingTimeInterval(Double(delay+3))
            // print(vids[cumulator].name)
            // print(time)
             let df = DateFormatter()

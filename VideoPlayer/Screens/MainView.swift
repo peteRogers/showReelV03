@@ -26,7 +26,7 @@ struct MainView: View {
                
                 NSCursor.unhide()
                 showingSheet.toggle()
-                print(sliderVal)
+               
             }.fullScreenCover(isPresented: $showingSheet) {
                 SheetView(sliderVal: $sliderVal).background(.white)
             }
