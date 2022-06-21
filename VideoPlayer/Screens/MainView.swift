@@ -81,7 +81,7 @@ struct SheetView: View {
                                         .font(.system(size: 20))
                                         .foregroundColor(.black)
                                         .padding()
-          
+            //Text(Date())
         
         Button("Press to Hide") {
             NSCursor.hide()

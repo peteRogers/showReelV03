@@ -84,7 +84,7 @@ class LoopingPlayerUIView: UIView {
         tv.text = v!.title
         nv.alpha = 0
         nv.text = v!.name
-        print(sliderVal!)
+       
         UIView.animate(withDuration: 1, delay: 1,
             animations: {
             if(self.sliderVal! > 0){

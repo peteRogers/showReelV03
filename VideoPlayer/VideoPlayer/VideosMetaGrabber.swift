@@ -12,7 +12,7 @@ class VideosMetaGrabber{
     
     var vids:[VidInfo] = []
     var current:Int = 0
-    var delay:Double = 0
+    var delay:Double = 5
     
     init (){
         if let localData = self.readLocalFile(forName: "vids") {
@@ -62,16 +62,16 @@ private func readLocalFile(forName name: String) -> Data? {
     func makeRunList(){
         var cumulator = current
         var time = Date()
+        print(time)
         var plist:[playListInfo] = []
         for _ in 0 ... 8{
             if(cumulator == vids.count){
                 cumulator = 0
             }
-            
+           // print(vids[cumulator].item!.duration.seconds)
             time = time + Double(vids[cumulator].item!.duration.seconds)
             time = time.addingTimeInterval(Double(delay+3))
-           // print(vids[cumulator].name)
-           // print(time)
+           
             let df = DateFormatter()
             df.dateFormat = "HH:mm"
             let p = playListInfo(title: vids[cumulator].title, name: vids[cumulator].name, time: df.string(from: time) )
@@ -95,24 +95,24 @@ private func readLocalFile(forName name: String) -> Data? {
     }
     
     
-   
-   private func loadJson(fromURLString urlString: String,
-                         completion: @escaping (Result<Data, Error>) -> Void) {
-       if let url = URL(string: urlString) {
-           print("url String \(url)")
-           let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
-               if let error = error {
-                   completion(.failure(error))
-               }
-               
-               if let data = data {
-                   completion(.success(data))
-               }
-           }
-           
-           urlSession.resume()
-       }
-   }
+//   
+//   private func loadJson(fromURLString urlString: String,
+//                         completion: @escaping (Result<Data, Error>) -> Void) {
+//       if let url = URL(string: urlString) {
+//           print("url String \(url)")
+//           let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
+//               if let error = error {
+//                   completion(.failure(error))
+//               }
+//               
+//               if let data = data {
+//                   completion(.success(data))
+//               }
+//           }
+//           
+//           urlSession.resume()
+//       }
+//   }
 
    private func parse(jsonData: Data) {
        do {
@@ -132,9 +132,10 @@ private func readLocalFile(forName name: String) -> Data? {
    }
     
          private func loadVideo(filename:String)->AVPlayerItem{
+            
              let fileUrl = Bundle.main.url(forResource: filename, withExtension: nil)
              let asset = AVAsset(url: fileUrl!)
-             print(asset.duration.seconds)
+             asset.duration.seconds
              return AVPlayerItem(asset: asset)
     }
 }
