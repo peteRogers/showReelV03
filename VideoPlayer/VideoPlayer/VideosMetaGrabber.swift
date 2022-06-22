@@ -19,7 +19,7 @@ class VideosMetaGrabber{
             print(localData)
                     self.parse(jsonData: localData)
                 }
-        current = UserDefaults.standard.integer(forKey: "currentVal")
+       
     }
     
 //    func getData() -> [VidInfo]{
@@ -33,9 +33,11 @@ class VideosMetaGrabber{
     
 private func readLocalFile(forName name: String) -> Data? {
        do {
+           
+           
            if let bundlePath = Bundle.main.path(forResource: name,
                                                 ofType: "json"),
-               let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+              let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
                return jsonData
            }
        } catch {
@@ -46,13 +48,14 @@ private func readLocalFile(forName name: String) -> Data? {
    }
     
     func playNext()->VidInfo{
+        print("from play next")
         if(current >= vids.count){
             current = 0
         }
        // vids[current].item?.seek(to: CMTime.zero)
         let v = vids[current]
         makeRunList()
-        UserDefaults.standard.set(self.current, forKey: "currentVal")
+       
         current += 1
         
         return v
@@ -73,7 +76,7 @@ private func readLocalFile(forName name: String) -> Data? {
        // print(time)
         cumulator += 1
         var plist:[playListInfo] = []
-        for _ in 0 ... 12{
+        for _ in 0 ... 19{
             if(cumulator == vids.count){
                 cumulator = 0
             }

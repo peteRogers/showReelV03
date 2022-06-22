@@ -14,7 +14,7 @@ struct MainView: View {
     @State private var player = AVQueuePlayer()
     @State private var showingSheet = false
     @State private var sliderVal:Double = 5
-    @State private var currentVal:Int = UserDefaults.standard.integer(forKey: "currentVal")
+    @State private var currentVal:Int = 0
 
    
                 
@@ -79,8 +79,8 @@ struct SheetView: View {
                 .padding()
             Spacer()
             Text("Set the video to play next")
-                        Slider(value: IntDoubleBinding($currentVal).doubleValue, in: 0.0...10.0, step: 1.0)
-            Text("current video: \(Int(currentVal))").fontWeight(.bold)
+                        Slider(value: IntDoubleBinding($currentVal).doubleValue, in: 0.0...25.0, step: 1.0)
+            Text("Choose Video: \(Int(currentVal))").fontWeight(.bold)
                 .font(.system(size: 20))
                 .foregroundColor(.black)
                 .padding()

@@ -68,15 +68,20 @@ class LoopingPlayerUIView: UIView {
     }
     
     func setCurrentPosition(current:Int){
-        print("foofoofoofoo \(current)")
+       // print("foofoofoofoo \(current)")
         videos?.setCurrent(c: current)
        // loadVideo()
         goEnd()
     }
     
     func goEnd(){
+       // print("go end released")
+        print(self.player?.currentItem?.duration)
         if let p = player?.currentItem{
-            player?.seek(to: (p.duration))
+            print("go entered")
+            p.seek(to: CMTimeMakeWithSeconds(p.duration.seconds - 1, preferredTimescale: 90000), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+            print(p.currentTime())
+            print(p.duration)
         }
        
         
@@ -88,7 +93,7 @@ class LoopingPlayerUIView: UIView {
        
        
         
-        
+        NotificationCenter.default.removeObserver(self)
        
         playerLayer.isHidden = true
  
