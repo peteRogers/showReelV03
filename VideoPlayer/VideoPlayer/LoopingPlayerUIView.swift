@@ -13,6 +13,7 @@ class LoopingPlayerUIView: UIView {
     private let playerLayer = AVPlayerLayer()
     private var player: AVPlayer?
     var sliderVal:Double?
+    var currentVal:Int?
     private var videos:VideosMetaGrabber?
     private var tv:UILabel!
     private var nv:UILabel!
@@ -23,10 +24,11 @@ class LoopingPlayerUIView: UIView {
     
    
     init(
-        player: AVQueuePlayer, sliderVal:Double,
+        player: AVQueuePlayer, sliderVal:Double, currentVal:Int,
          videoGravity: AVLayerVideoGravity = .resizeAspectFill) {
              self.player = player
              self.sliderVal = sliderVal
+             self.currentVal = currentVal
         super.init(frame: .zero)
        
 
@@ -62,6 +64,21 @@ class LoopingPlayerUIView: UIView {
         self.sliderVal = sliderVal
         videos?.setDelay(d: sliderVal)
         
+        
+    }
+    
+    func setCurrentPosition(current:Int){
+        print("foofoofoofoo \(current)")
+        videos?.setCurrent(c: current)
+       // loadVideo()
+        goEnd()
+    }
+    
+    func goEnd(){
+        if let p = player?.currentItem{
+            player?.seek(to: (p.duration))
+        }
+       
         
     }
     

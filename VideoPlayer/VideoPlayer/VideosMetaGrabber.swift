@@ -19,7 +19,7 @@ class VideosMetaGrabber{
             print(localData)
                     self.parse(jsonData: localData)
                 }
-                
+        current = UserDefaults.standard.integer(forKey: "currentVal")
     }
     
 //    func getData() -> [VidInfo]{
@@ -46,17 +46,22 @@ private func readLocalFile(forName name: String) -> Data? {
    }
     
     func playNext()->VidInfo{
-        if(current == vids.count){
+        if(current >= vids.count){
             current = 0
         }
        // vids[current].item?.seek(to: CMTime.zero)
         let v = vids[current]
         makeRunList()
+        UserDefaults.standard.set(self.current, forKey: "currentVal")
         current += 1
         
         return v
         
         
+    }
+    func setCurrent(c:Int){
+        
+        current = c
     }
     
     

@@ -14,6 +14,7 @@ struct MainView: View {
     @State private var player = AVQueuePlayer()
     @State private var showingSheet = false
     @State private var sliderVal:Double = 5
+    @State private var currentVal:Int = UserDefaults.standard.integer(forKey: "currentVal")
 
    
                 
@@ -22,13 +23,13 @@ struct MainView: View {
        
         ZStack(alignment: .center) {
                 
-            PlayerView(player: player, sliderVal: $sliderVal).onTapGesture{
+            PlayerView(player: player, sliderVal: $sliderVal, currentVal: $currentVal).onTapGesture{
                
                 NSCursor.unhide()
                 showingSheet.toggle()
                
             }.fullScreenCover(isPresented: $showingSheet) {
-                SheetView(sliderVal: $sliderVal).background(.white)
+                SheetView(sliderVal: $sliderVal, currentVal: $currentVal).background(.white)
             }
          
             
@@ -64,6 +65,7 @@ struct MainView: View {
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var sliderVal: Double
+    @Binding var currentVal: Int
     var body: some View {
         
       
@@ -76,6 +78,14 @@ struct SheetView: View {
                 .foregroundColor(.black)
                 .padding()
             Spacer()
+            Text("Set the video to play next")
+                        Slider(value: IntDoubleBinding($currentVal).doubleValue, in: 0.0...10.0, step: 1.0)
+            Text("current video: \(Int(currentVal))").fontWeight(.bold)
+                .font(.system(size: 20))
+                .foregroundColor(.black)
+                .padding()
+            Spacer()
+            
             Text("Make this window fullscreen and then Press button below to hide the cursor")
                                         .fontWeight(.bold)
                                         .font(.system(size: 20))
@@ -103,5 +113,21 @@ struct SheetView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+    }
+}
+
+struct IntDoubleBinding {
+    let intValue : Binding<Int>
+    
+    let doubleValue : Binding<Double>
+    
+    init(_ intValue : Binding<Int>) {
+        self.intValue = intValue
+        
+        self.doubleValue = Binding<Double>(get: {
+            return Double(intValue.wrappedValue)
+        }, set: {
+            intValue.wrappedValue = Int($0)
+        })
     }
 }
